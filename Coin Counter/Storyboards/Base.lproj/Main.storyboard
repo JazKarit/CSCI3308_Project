@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Coin_Counter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Counting!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dd-MB-Tr7">
+                                <rect key="frame" x="17" y="152" width="380" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="jy1-OI-DeY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rockwell-Regular" family="Rockwell" pointSize="40"/>
+                                <color key="textColor" red="0.87450980392156863" green="0.80392156862745101" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Io-IH-Yie">
+                                <rect key="frame" x="95" y="243" width="224" height="96"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <state key="normal" title="Take Photo"/>
+                                <connections>
+                                    <segue destination="MzB-s3-O0V" kind="show" id="QSl-rx-chP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.23529411764705882" green="0.25882352941176467" blue="0.27058823529411763" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5Dd-MB-Tr7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="108" id="1wp-bh-M40"/>
+                            <constraint firstItem="8Io-IH-Yie" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="95" id="9mp-nd-ecj"/>
+                            <constraint firstItem="8Io-IH-Yie" firstAttribute="top" secondItem="5Dd-MB-Tr7" secondAttribute="bottom" constant="39" id="AWn-b3-dkC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Io-IH-Yie" secondAttribute="bottom" constant="523" id="SAg-MY-eBf"/>
+                            <constraint firstItem="5Dd-MB-Tr7" firstAttribute="centerX" secondItem="8Io-IH-Yie" secondAttribute="centerX" id="U4E-U2-6ej"/>
+                            <constraint firstItem="5Dd-MB-Tr7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="17" id="W73-lE-Yyb"/>
+                            <constraint firstItem="5Dd-MB-Tr7" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eLO-g6-lfh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="Start_Counting" destination="5Dd-MB-Tr7" id="X4Z-oh-ain"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
+        </scene>
+        <!--Take_PhotoVC-->
+        <scene sceneID="XXw-8E-zZf">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Take_Photo" storyboardName="Take_Photo" referencedIdentifier="Take_PhotoVC" id="MzB-s3-O0V" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="P2f-mX-DrM"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VaD-Tb-6lC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="566" y="13"/>
+        </scene>
+    </scenes>
+</document>
