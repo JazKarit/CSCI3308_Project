@@ -8,7 +8,7 @@ import math
 
 
 
-def detect_coin_circles(img_src,show_result=False,debug=False):
+def detect_coin_circles(img_src,show_result=False,debug=False,var=1):
 	"""
 	Detect coins in image and return a list of circles in format((x,y),r)
 	
@@ -46,12 +46,12 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 	####
 	# noise removal
 	kernel = np.ones((3,3),np.uint8)
-	opening = cv2.morphologyEx(mask,cv2.MORPH_OPEN,kernel, iterations = 3)
+	opening = cv2.morphologyEx(mask,cv2.MORPH_OPEN,kernel, iterations = 2)
 	# sure background area - borders enlarged a bit
 	sure_bg = cv2.dilate(opening,kernel,iterations=2)
 	# Finding sure foreground area
-	dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,5)
-	ret, sure_fg = cv2.threshold(dist_transform,0.4*dist_transform.max(),255,0)#this one effects detection a lot lower number ~ -> more detection
+	dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,0)
+	ret, sure_fg = cv2.threshold(dist_transform,.41*dist_transform.max(),255,0)#this one effects detection a lot lower number ~ -> more detection
 	# Finding unknown region
 	sure_fg = np.uint8(sure_fg)
 	unknown = cv2.subtract(sure_bg,sure_fg)
