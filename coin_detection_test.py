@@ -14,11 +14,11 @@ tests = [1,4,5,7,8,11,12]
 #for var_a in var_tries:
 errors = []
 for i in tests:
-	circles,image = detect_coin_circles('test_images/coins' + str(i) + '.jpg',True)
+	circles,image,pennies = detect_coin_circles('test_images/coins' + str(i) + '.jpg',True)
 	errors.append(1 - abs(len(circles)-actual_circles[i-1])/float(actual_circles[i-1]))
 	calculated_value = coinFinder(circles)
 	calculated_value_errors.append(1-abs(actual_values[i-1]-calculated_value)/float(actual_values[i-1]))
-	print("calculated value: " + str(calculated_value))
+	print("calculated value: " + str(calculated_value+pennies*.01))
 	print("actual value: " + str(actual_values[i-1]))
 	print("percent: " + str(1-abs(actual_values[i-1]-calculated_value)/float(actual_values[i-1])))
 #print("var = " + str(var_a) + ": " + str(np.average(np.array(errors))))

@@ -13,7 +13,7 @@ def coinAvg(coins, average):    # updates the averages for each list of coins
 def coinStrdev(average): #updates the standard deviations for each list of coins
     strdev = []
     for x in range(len(average)):
-        strdev.append(average[x]*.0675)
+        strdev.append(average[x]*.07)
     return strdev
 
 def coinFinder(circles):    #main function
@@ -26,7 +26,7 @@ def coinFinder(circles):    #main function
         strdev = coinStrdev(average)
     #prints newest coin and updated averages and strdevs
         # for u in range(len(average)):
-        #     print("Average: ", average[u], "StrDev: ", strdev[u])
+            # print("Average: ", average[u], "StrDev: ", strdev[u])
         # print("Circle: ", circles[x][1])
         n=0
         if(x==0):
@@ -63,12 +63,13 @@ def coinFinder(circles):    #main function
                 amount[x] = .10
 
 
-# prints the whole list of coins
-    # for x in range(len(coins)):
-    #     for y in range(len(coins[x])):
-    #         print("Coin: ", coins[x][y])
-    # for x in range(len(strdev)):
-    #     print(x, ": ", strdev[x])
+#prints the whole list of coins
+	# for x in range(len(coins)):
+		# print("List",x,":")
+		# for y in range(len(coins[x])):
+			# print("Coin: ", coins[x][y])
+	# for x in range(len(strdev)):
+		# print(x, ": ", strdev[x])
 
     total = 0
     for x in range(len(coins)):    # calculates the total money
