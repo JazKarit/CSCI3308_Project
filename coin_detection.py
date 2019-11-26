@@ -149,29 +149,38 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
     
 	circles2,pennies2,coin_colors2 = get_circles(mask,original2,image,show_result,debug)
 
-	circles3 = circles + circles2 
-	circles4 = list(circles3)
-	for i in range(len(circles3)):
-		for j in range(i+1,len(circles3)):
-			dist = math.sqrt((circles3[i][0][0]-circles3[j][0][0])**2 + (circles3[i][0][1]-circles3[j][0][1])**2 )
-			if (dist*1.3 < circles3[j][1] or dist*1.3 < circles3[i][1]) and len(circles4) > j:
-				circles4.pop(j)
+	for circle in circles2:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist*1.3 < circle[1]:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	# ~ circles3 = circles + circles2 
+	# ~ circles4 = list(circles3)
+	# ~ for i in range(len(circles3)):
+		# ~ for j in range(i+1,len(circles3)):
+			# ~ dist = math.sqrt((circles3[i][0][0]-circles3[j][0][0])**2 + (circles3[i][0][1]-circles3[j][0][1])**2 )
+			# ~ if (dist*1.3 < circles3[j][1] or dist*1.3 < circles3[i][1]) and len(circles4) > j:
+				# ~ circles4.pop(j)
 			# ~ else:
 				# ~ print(dist*1.3,circles3[j][1])
 				
-	for circle in circles4:			
+	for circle in circles:			
 		cv2.circle(original, (int(circle[0][0]),int(circle[0][1])),int(circle[1]), (random.randint(0,255), random.randint(0,255), random.randint(0,255)), 2)
 		#cv2.putText(original, "#{}".format(len(circles)), (int(x) - 10, int(y)),
 		#cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
 	
 	if show_result:
-		cv2.imshow("Detected Circles1", original)
+		cv2.imshow("Detected Circles", original)
 		cv2.waitKey(0)
 
 		
 	
 	
-	return circles4,original2,pennies
+	return circles,original,pennies
 
 
 
