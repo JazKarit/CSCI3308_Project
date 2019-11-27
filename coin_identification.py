@@ -64,12 +64,12 @@ def coinFinder(circles):    #main function
 
 
 #prints the whole list of coins
-	for x in range(len(coins)):
-		print("List",x,":")
-		for y in range(len(coins[x])):
-			print("Coin: ", coins[x][y])
-	for x in range(len(strdev)):
-		print(x, ": ", strdev[x])
+	# ~ for x in range(len(coins)):
+		# ~ print("List",x,":")
+		# ~ for y in range(len(coins[x])):
+			# ~ print("Coin: ", coins[x][y])
+	# ~ for x in range(len(strdev)):
+		# ~ print(x, ": ", strdev[x])
 
     total = 0
     for x in range(len(coins)):    # calculates the total money

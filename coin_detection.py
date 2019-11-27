@@ -7,7 +7,7 @@ import random
 
 
 
-def get_circles(mask,original,image,show_result=False,debug=False):
+def get_circles(mask,original,image,show_result=False,debug=False,var=0.35):
 	coin_colors = []
 	####
 	# noise removal
@@ -18,7 +18,7 @@ def get_circles(mask,original,image,show_result=False,debug=False):
 	sure_bg = cv2.dilate(opening,kernel,iterations=2)
 	# Finding sure foreground area
 	dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,0)
-	ret, sure_fg = cv2.threshold(dist_transform,.41*dist_transform.max(),255,0)#this one effects detection a lot lower number ~ -> more detection
+	ret, sure_fg = cv2.threshold(dist_transform,var*dist_transform.max(),255,0)#this one effects detection a lot lower number ~ -> more detection
 	# Finding unknown region
 	sure_fg = np.uint8(sure_fg)
 	unknown = cv2.subtract(sure_bg,sure_fg)
@@ -77,8 +77,9 @@ def get_circles(mask,original,image,show_result=False,debug=False):
 			if x-r < 0 or y-r < 0 or x+r > len(image[0]) or y+r > len(image):
 				continue
 			penny = True
-			for i in range(-20,20):
-				for j in range(-20,20):
+			square_r = int(r/2)
+			for i in range(-square_r,square_r):
+				for j in range(-square_r,square_r):
 					coin_colors.append(image[int(y+j)][int(x+i)])
 					if image[int(y+j)][int(x+i)][1] < 40:
 						penny = False
@@ -96,8 +97,16 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 	
 	"""
 	image = cv2.imread(img_src)
+	to_show = image.copy()
 	original = image.copy()
 	original2 = image.copy()
+	original3 = image.copy()
+	original4 = image.copy()
+	original5 = image.copy()
+	original6 = image.copy()
+	original7 = image.copy()
+	original8 = image.copy()
+	original9 = image.copy()
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 	
 	#make pixel_arr, 1D array of all pixels
@@ -119,7 +128,7 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 	cimg = original.copy()
 	
 
-
+	too_close = 0.5
 	kernel = np.ones((3, 3), np.uint8)
 
 	#show mask: white is possible coins
@@ -127,11 +136,54 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 		cv2.imshow("mask", mask)
 		cv2.waitKey(0)
 
-	circles,pennies,coin_colors = get_circles(mask,original,image,show_result,debug)
+	circles,pennies,coin_colors = get_circles(mask,original,image,show_result,debug,var = 0.41)
+	circles3,pennies3,coin_colors3 = get_circles(mask,original2,image,show_result,debug,var = 0.1)
+	circles4,pennies4,coin_colors4 = get_circles(mask,original4,image,show_result,debug,var = 0.2)
+	circles5,pennies5,coin_colors5 = get_circles(mask,original5,image,show_result,debug,var = 0.3)
+	circles6,pennies6,coin_colors6 = get_circles(mask,original6,image,show_result,debug,var = 0.5)
+	#Add new circles that are not repeats
+	for circle in circles6:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist < circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
 	
+	for circle in circles5:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist < circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	
+	for circle in circles4:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist< circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	
+	for circle in circles3:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist< circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
 
-		
-	avg_color = np.average(coin_colors, axis=0)
+	##### Detect coins again using color of detected coins
+	avg_color = np.average(coin_colors+coin_colors3, axis=0)
 	std = np.std(coin_colors, axis=0)
 
 	#Make a new mask from the colors of detected coins
@@ -147,13 +199,45 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 		cv2.waitKey(0)
     
     
-	circles2,pennies2,coin_colors2 = get_circles(mask,original2,image,show_result,debug)
+	circles2,pennies2,coin_colors2 = get_circles(mask,original3,image,show_result,debug,var = 0.41)
+	circles7,pennies7,coin_colors7 = get_circles(mask,original7,image,show_result,debug,var = 0.3)
+	circles8,pennies8,coin_colors8 = get_circles(mask,original8,image,show_result,debug,var = 0.2)
+	circles9,pennies9,coin_colors9 = get_circles(mask,original9,image,show_result,debug,var = 0.1)
+    #####
 
+	#Add new circles that are not repeats
 	for circle in circles2:
 		repeat = False
 		for c in circles:
 			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
-			if dist*1.3 < circle[1]:
+			if dist < circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	for circle in circles7:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist < circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	for circle in circles8:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist < circle[1]*too_close:
+				repeat = True
+				break
+		if not repeat:
+			circles.append(circle)
+	for circle in circles9:
+		repeat = False
+		for c in circles:
+			dist = math.sqrt((circle[0][0]-c[0][0])**2 + (circle[0][1]-c[0][1])**2 )
+			if dist < circle[1]*too_close:
 				repeat = True
 				break
 		if not repeat:
@@ -169,18 +253,18 @@ def detect_coin_circles(img_src,show_result=False,debug=False):
 				# ~ print(dist*1.3,circles3[j][1])
 				
 	for circle in circles:			
-		cv2.circle(original, (int(circle[0][0]),int(circle[0][1])),int(circle[1]), (random.randint(0,255), random.randint(0,255), random.randint(0,255)), 2)
+		cv2.circle(to_show, (int(circle[0][0]),int(circle[0][1])),int(circle[1]), (0, 255, random.randint(0,255)), 2)
 		#cv2.putText(original, "#{}".format(len(circles)), (int(x) - 10, int(y)),
 		#cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
 	
 	if show_result:
-		cv2.imshow("Detected Circles", original)
+		cv2.imshow("Detected Circles", to_show)
 		cv2.waitKey(0)
 
 		
 	
 	
-	return circles,original,pennies
+	return circles,to_show,pennies
 
 
 

@@ -4,11 +4,11 @@ import math
 from coin_detection import detect_coin_circles
 from coin_identification import coinFinder
 
-actual_circles = [19,19,19,21,15,15,15,15,15,15,15,15,15,15,15,15,15]
-actual_values = [2.74,0,0,3.09,1.74,0,1.74,1.74,1.74,1.74,1.74,1.74]
+actual_circles = [19,  19,19,21,15,15,15,15,15,15,15,15,15,15,15,15,15]
+actual_values =  [2.74,0.1,0.1,3.09,1.74,0.1,1.74,1.74,1.74,1.74,1.74,1.74,1.0,2.75]
 calculated_value_errors = []
 errors = []
-tests = [1,4,5,7,8,11,12]
+tests = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
 #var_tries = [.41,.39,.4,.38,.37,.36]
 #Test our coin detection on all the test images we have
 #for var_a in var_tries:
