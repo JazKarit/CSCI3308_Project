@@ -86,7 +86,8 @@ def get_circles(mask,original,image,show_result=False,debug=False,var=0.35):
 			if penny:
 				pennies+=1
 				continue
-			circles.append(((x,y),r))
+			if r > 10:
+				circles.append(((x,y),r))
 			
 	return circles,pennies,coin_colors
 
