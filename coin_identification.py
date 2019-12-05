@@ -55,20 +55,23 @@ def coinFinder(circles):    #main function
             amount[x] = .25
     for x in range(len(average)):
         if(x!=high_index):
-            if(((average[high_index]/average[x]) <= (1.1916+.06755)) and ((average[high_index]/average[x]) >= (1.1916-.06755))):
-                amount[x] = .05
-            elif(((average[high_index]/average[x]) <= (1.3267+.0423)) and ((average[high_index]/average[x]) >= (1.3267-.06755))):
-                amount[x] = .01
-            elif(((average[high_index]/average[x]) <= (1.4113+.0423)) and ((average[high_index]/average[x]) >= (1.4113-.0423))):
-                amount[x] = .10
 
+            if(((average[high_index]/average[x]) <= (1.1916+.10985)) and ((average[high_index]/average[x]) >= (1.1916-.10985))):
+                amount[x] = .05
+            #Pennies error bounds:
+            # elif(((average[high_index]/average[x]) <= (1.3267+.0423)) and ((average[high_index]/average[x]) >= (1.3267-.06755))):
+            #     amount[x] = .01
+            elif(((average[high_index]/average[x]) <= (1.4113+.10985)) and ((average[high_index]/average[x]) >= (1.4113-.10985))):
+                amount[x] = .10
+                
 
 # prints the whole list of coins
-    # for x in range(len(coins)):
-    #     for y in range(len(coins[x])):
-    #         print("Coin: ", coins[x][y])
-    # for x in range(len(strdev)):
-    #     print(x, ": ", strdev[x])
+    # ~ for x in range(len(coins)):
+        # ~ print("List", x, ":")
+        # ~ for y in range(len(coins[x])):
+            # ~ print("Coin: ", coins[x][y])
+    # ~ for x in range(len(strdev)):
+        # ~ print(x, ": ", strdev[x])
 
     total = 0
     for x in range(len(coins)):    # calculates the total money
@@ -111,5 +114,20 @@ if __name__== '__main__':
             [(0,0),62.208],
             [(0,0),62.356],
             [(0,0),62.661]]
-    total = coinFinder(circles3)
+    circles4 = [((303.3307189941406, 114.0750503540039), 36.49294662475586),
+((601.2237548828125, 132.0644073486328), 47.30678939819336),
+((760.9459228515625, 137.1351318359375), 48.10158920288086),
+((435.67669677734375, 138.0488739013672), 36.912940979003906),
+((277.6201171875, 182.35491943359375), 34.313232421875), ((415.5,
+219.5), 37.10131072998047), ((768.1914672851562, 235.91844177246094),
+43.16984176635742), ((126.15723419189453, 245.76100158691406),
+41.93385696411133), ((566.0, 255.0), 38.07896423339844),
+((315.326171875, 303.1930236816406), 47.69312286376953),
+((549.7882690429688, 369.5490417480469), 49.373958587646484),
+((824.5972290039062, 388.59722900390625), 51.17155838012695),
+((705.9117431640625, 421.0882263183594), 44.678226470947266),
+((336.625, 427.5), 36.57728576660156), ((470.39849853515625,
+506.1278076171875), 37.89807891845703)]
+
+    total = coinFinder(circles2)
     print(total)
